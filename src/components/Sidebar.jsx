@@ -85,7 +85,6 @@ export default function Sidebar() {
       <List sx={{ pt: 0, px: 3 }}>
         {menuItems.map((item) => (
           <ListItem
-            button
             key={item.text}
             sx={{
               py: 0.5,
