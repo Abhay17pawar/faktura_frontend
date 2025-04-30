@@ -8,7 +8,6 @@ const App = () => {
     <Router>
       <div>
         <Sidebar />
-
           <Routes>
             <Route path="/price-list" element={<Pricelist />} />
           </Routes>

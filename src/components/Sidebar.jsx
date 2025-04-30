@@ -77,7 +77,7 @@ export default function Sidebar() {
   const drawerContent = (
     <>
       <Box sx={{ p: 2, pb: 0, textAlign: 'center' }}>
-        <Typography variant="h6" sx={{ color: '#616161', fontWeight: 500 }}>
+        <Typography variant="h6" sx={{ color: '#616161', fontWeight: 500, cursor: 'pointer' }}>
           Menu
         </Typography>
         <Box sx={{ borderBottom: '2px solid #03A9F4', width: '100%', mt: 1, mb: 1 }} />
@@ -114,7 +114,7 @@ export default function Sidebar() {
               primaryTypographyProps={{
                 fontSize: '0.9rem',
                 fontWeight: 400,
-                color: item.lightText ? '#B0BEC5' : 'inherit', // Grey text for specific items
+                color: item.lightText ? '#B0BEC5' : 'inherit', 
               }}
             />
           </ListItem>
@@ -127,44 +127,45 @@ export default function Sidebar() {
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
 
-      <AppBar position="fixed" sx={{ backgroundColor: '#0288D1' }}>
-        <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            {isMobile && (
-              <IconButton
-                color="inherit"
-                edge="start"
-                onClick={handleDrawerToggle}
-                sx={{ mr: 2 }}
-              >
-                <MenuIcon />
-              </IconButton>
-            )}
+          <AppBar position="fixed" sx={{ backgroundColor: '#0288D1' }}>
+            <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <Box
-                component="img"
-                src={politicianImg}
-                alt="User Icon"
-                sx={{
-                  width: 32,
-                  height: 32,
-                  borderRadius: '50%',
-                  mr: 1.5,
-                }}
-              />
-              <Box>
-                <Typography variant="subtitle1" sx={{ fontWeight: 500, lineHeight: 1.2 }}>
-                  John Andre
-                </Typography>
-                <Typography
-                  variant="caption"
-                  sx={{ color: 'rgba(255, 255, 255, 0.8)', lineHeight: 1 }}
-                >
-                  Storfjord AS
-                </Typography>
-              </Box>
-            </Box>
+      {isMobile ? (
+        <IconButton
+          color="inherit"
+          edge="start"
+          onClick={handleDrawerToggle}
+          sx={{ mr: 2 }}
+        >
+          <MenuIcon />
+        </IconButton>
+      ) : (
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Box
+            component="img"
+            src={politicianImg}
+            alt="User Icon"
+            sx={{
+              width: 32,
+              height: 32,
+              borderRadius: '50%',
+              mr: 1.5,
+            }}
+          />
+          <Box>
+            <Typography variant="subtitle1" sx={{ fontWeight: 500, lineHeight: 1.2 }}>
+              John Andre
+            </Typography>
+            <Typography
+              variant="caption"
+              sx={{ color: 'rgba(255, 255, 255, 0.8)', lineHeight: 1 }}
+            >
+              Storfjord AS
+            </Typography>
           </Box>
+        </Box>
+      )}
+    </Box>
 
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Typography variant="body2" sx={{ mr: 2 }}>
