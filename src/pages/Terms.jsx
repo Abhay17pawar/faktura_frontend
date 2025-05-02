@@ -2,6 +2,13 @@ import React, { useState, useRef, useEffect } from "react";
 import StaggeredDropDown from "../components/Dropdown";
 
 export default function Terms() {
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+  const DIAMOND_ICON = import.meta.env.VITE_DIAMOND;
+  const SWEDEN_FLAG = import.meta.env.VITE_SWEDEN_FLAG;
+  const ENGLISH_FLAG = import.meta.env.VITE_ENGLISH_FLAG;
+  const BG_IMAGE = import.meta.env.VITE_BG_IMAGE;
+  const MENU_ICON = import.meta.env.VITE_MENU_ICON;
+
   const [dropdownOpenMobile, setDropdownOpenMobile] = useState(false);
   const [dropdownOpenDesktop, setDropdownOpenDesktop] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -66,7 +73,7 @@ export default function Terms() {
     async function fetchLanguageData() {
       try {
         const response = await fetch(
-          `https://faktura-backend.onrender.com/language/${languageId}`,
+          `${API_BASE_URL}/language/${languageId}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -89,8 +96,7 @@ export default function Terms() {
       <div
         className="fixed inset-0 z-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage:
-            "url('https://storage.123fakturera.se/public/wallpapers/sverige43.jpg')",
+          backgroundImage: `url('${BG_IMAGE}')`,
           backgroundAttachment: "fixed",
         }}
       />
@@ -103,21 +109,21 @@ export default function Terms() {
             onClick={() => navigate("/login")}
           >
             <img
-              src="https://storage.123fakturera.se/public/icons/diamond.png"
+              src={DIAMOND_ICON}
               alt="Diamond Icon"
               style={{ height: "2rem" }}
             />
           </div>
 
           {/* Mobile Header */}
-          <div className="w-full flex justify-between items-center px-6 pt-12 max-[1268px]:flex hidden z-20">
+          <div className="w-full hidden justify-between items-center px-6 pt-12 max-[1268px]:flex z-20">
             <div className="relative" ref={hamburgerRef}>
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
                 className="flex items-center gap-2 text-white font-medium"
               >
                 <img
-                  src="https://img.icons8.com/ios-filled/50/ffffff/menu--v1.png"
+                  src={MENU_ICON}
                   alt="Menu Icon"
                   className="w-6 h-6"
                 />
@@ -125,8 +131,10 @@ export default function Terms() {
 
               {menuOpen && (
                 <div ref={menuRef}>
-                  <StaggeredDropDown onOptionClick={() => setMenuOpen(false)} 
-                    languageData={languageData}/>
+                  <StaggeredDropDown
+                    onOptionClick={() => setMenuOpen(false)}
+                    languageData={languageData}
+                  />
                 </div>
               )}
             </div>
@@ -138,11 +146,7 @@ export default function Terms() {
               >
                 <span>{languageId === 1 ? "English" : "Svenska"}</span>
                 <img
-                  src={
-                    languageId === 1
-                      ? "https://storage.123fakturere.no/public/flags/GB.png"
-                      : "https://storage.123fakturere.no/public/flags/SE.png"
-                  }
+                  src={languageId === 1 ? ENGLISH_FLAG : SWEDEN_FLAG}
                   alt="Language Flag"
                   className="w-6 h-4"
                 />
@@ -162,7 +166,7 @@ export default function Terms() {
                   >
                     <span className="mr-2">Svenska</span>
                     <img
-                      src="https://storage.123fakturere.no/public/flags/SE.png"
+                      src={SWEDEN_FLAG}
                       alt="Swedish flag"
                       className="w-6 h-4 rounded-sm"
                     />
@@ -176,7 +180,7 @@ export default function Terms() {
                   >
                     <span>English</span>
                     <img
-                      src="https://storage.123fakturere.no/public/flags/GB.png"
+                      src={ENGLISH_FLAG}
                       alt="English flag"
                       className="w-6 h-4 rounded-sm"
                     />
@@ -197,16 +201,14 @@ export default function Terms() {
 
               <div className="relative" ref={buttonRefDesktop}>
                 <button
-                  onClick={() => setDropdownOpenDesktop(!dropdownOpenDesktop)}
+                  onClick={() =>
+                    setDropdownOpenDesktop(!dropdownOpenDesktop)
+                  }
                   className="flex items-center gap-2"
                 >
                   <span>{languageId === 1 ? "English" : "Svenska"}</span>
                   <img
-                    src={
-                      languageId === 1
-                        ? "https://storage.123fakturere.no/public/flags/GB.png"
-                        : "https://storage.123fakturere.no/public/flags/SE.png"
-                    }
+                    src={languageId === 1 ? ENGLISH_FLAG : SWEDEN_FLAG}
                     alt="Language flag"
                     className="w-6 h-4 rounded-sm"
                   />
@@ -217,7 +219,9 @@ export default function Terms() {
                     ref={dropdownRefDesktop}
                     className="absolute right-0 mt-2 bg-white text-black shadow-lg rounded-md py-2 px-4 z-50 text-left"
                     style={{
-                      minWidth: dropdownWidth ? `${dropdownWidth}px` : "150px",
+                      minWidth: dropdownWidth
+                        ? `${dropdownWidth}px`
+                        : "150px",
                       width: "max-content",
                     }}
                   >
@@ -230,7 +234,7 @@ export default function Terms() {
                     >
                       <span className="mr-2">Svenska</span>
                       <img
-                        src="https://storage.123fakturere.no/public/flags/SE.png"
+                        src={SWEDEN_FLAG}
                         alt="Swedish flag"
                         className="w-6 h-4 rounded-sm"
                       />
@@ -244,7 +248,7 @@ export default function Terms() {
                     >
                       <span>English</span>
                       <img
-                        src="https://storage.123fakturere.no/public/flags/GB.png"
+                        src={ENGLISH_FLAG}
                         alt="English flag"
                         className="w-6 h-4 rounded-sm"
                       />
@@ -260,13 +264,14 @@ export default function Terms() {
             <h2 className="text-3xl font-bold text-white mb-6">{languageData?.terms}</h2>
 
             <button
-            onClick={() => {
-              window.close('', '_self', '');history.back();
-            }}
-            className="bg-green-600 text-white font-medium py-3 px-10 rounded-full mb-8 transition-colors"
-          >
-            {languageData?.button}
-          </button>
+              onClick={() => {
+                window.close('', '_self', '');
+                history.back();
+              }}
+              className="bg-green-600 text-white font-medium py-3 px-10 rounded-full mb-8 transition-colors"
+            >
+              {languageData?.button}
+            </button>
 
             <div className="bg-white rounded-xl p-7 md:max-w-3xl mx-auto text-gray-700 text-center leading-relaxed mb-8 whitespace-pre-line">
               {languageData?.paragraph}
@@ -274,13 +279,13 @@ export default function Terms() {
 
             <button
               onClick={() => {
-                window.close('', '_self', '');history.back();
+                window.close('', '_self', '');
+                history.back();
               }}
               className="bg-green-600 text-white font-medium py-3 px-10 rounded-full mb-8 transition-colors"
             >
               {languageData?.button}
             </button>
-
           </main>
         </div>
       )}
