@@ -22,6 +22,16 @@ This is the frontend of faktura's website
 - [Tailwind CSS](https://tailwindcss.com/)
 ## Getting Started
 
+## .env
+   ```sh
+VITE_API_BASE_URL=
+VITE_DIAMOND=
+VITE_SWEDEN_FLAG=
+VITE_ENGLISH_FLAG=
+VITE_BG_IMAGE=
+VITE_MENU_ICON=
+   ```
+
 To get a local copy up and running follow these simple example steps.
 ### Installation
 
